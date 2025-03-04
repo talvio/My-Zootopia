@@ -49,14 +49,15 @@ def foxes_to_html_list(fox_file):
     foxes_string = ""
     for fox in foxes_data:
         foxes_string += '<li class="cards__item">\n'
-        if fox.get('name'):
-            foxes_string += f"Name: {fox.get('name')}<br/>\n"
+        foxes_string += f'  <div class="card__title">{fox.get("name","No name")}</div>\n'
+        foxes_string += '   <p class="card__text">\n'
         if fox.get('characteristics',{}).get('diet', None):
-            foxes_string += f"Diet: {fox.get('characteristics',{}).get('diet', None)}<br/>\n"
+            foxes_string += f"      <strong>Diet:</strong> {fox.get('characteristics',{}).get('diet', None)}<br/>\n"
         if fox.get('locations', None):
-            foxes_string += f"Location: {fox.get('locations', [])[0]}<br/>\n"
+            foxes_string += f"      <strong>Location:</strong> {fox.get('locations', [])[0]}<br/>\n"
         if fox.get('characteristics',{}).get('type', None):
-            foxes_string += f"Type: {fox.get('characteristics',{}).get('type', None)}<br/>\n"
+            foxes_string += f"      <strong>Type:</strong> {fox.get('characteristics',{}).get('type', None)}<br/>\n"
+        foxes_string += "   </p>\n"
         foxes_string += "</li>\n\n"
     return foxes_string
 
