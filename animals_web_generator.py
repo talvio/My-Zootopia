@@ -5,9 +5,10 @@ TEMPLATE_FILE = "animals_template.html"
 DATA_PLACEHOLDER = "__REPLACE_ANIMALS_INFO__"
 ANIMALS_FILE = "animals.html"
 
+
 def load_data(file_path):
     """ Loads a JSON file """
-    with open(file_path, "r") as handle:
+    with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
@@ -39,23 +40,24 @@ def print_foxes(fox_file):
             print(f"Type: {fox.get('characteristics',{}).get('type', None)}")
         print()
 
-def foxes_in_one_string(fox_file):
+def foxes_to_html_list(fox_file):
     """
-    Read fox information and return it all in one string
-    :return: Information about foxes in one string
+    Read fox information and return it all in one string, each fox as HTML list (<li></li>) item
+    :return: Information about foxes in one string format as HTML list items
     """
     foxes_data = load_data(fox_file)
     foxes_string = ""
     for fox in foxes_data:
+        foxes_string += '<li class="cards__item">\n'
         if fox.get('name'):
-            foxes_string += f"Name: {fox.get('name')}\n"
+            foxes_string += f"Name: {fox.get('name')}<br/>\n"
         if fox.get('characteristics',{}).get('diet', None):
-            foxes_string += f"Diet: {fox.get('characteristics',{}).get('diet', None)}\n"
+            foxes_string += f"Diet: {fox.get('characteristics',{}).get('diet', None)}<br/>\n"
         if fox.get('locations', None):
-            foxes_string += f"Location: {fox.get('locations', [])[0]}\n"
+            foxes_string += f"Location: {fox.get('locations', [])[0]}<br/>\n"
         if fox.get('characteristics',{}).get('type', None):
-            foxes_string += f"Type: {fox.get('characteristics',{}).get('type', None)}\n"
-        foxes_string += "\n"
+            foxes_string += f"Type: {fox.get('characteristics',{}).get('type', None)}<br/>\n"
+        foxes_string += "</li>\n\n"
     return foxes_string
 
 
@@ -73,7 +75,8 @@ def save_to_file(file_path, data):
 def main():
     template = read_template_file(TEMPLATE_FILE)
     #print_foxes(FOX_FILE)
-    fox_html_data = template.replace(DATA_PLACEHOLDER, foxes_in_one_string(FOX_FILE))
+
+    fox_html_data = template.replace(DATA_PLACEHOLDER, foxes_to_html_list(FOX_FILE))
     save_to_file(ANIMALS_FILE, fox_html_data)
 
 
