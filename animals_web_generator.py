@@ -53,24 +53,27 @@ def serialize_animal(animal_obj):
     animal_list_item += f'  <span class="scientific__name">('
     animal_list_item += f'{animal_obj.get("taxonomy", {}).get('scientific_name', "no scientific name")})</span></div>\n'
     animal_list_item += '   <p class="card__text">\n'
+    animal_list_item += '   <ul class="animal__facts">\n'
     if animal_obj.get('characteristics', {}).get('diet', None):
-        animal_list_item += "      <strong>Diet:</strong> "
-        animal_list_item += f"{animal_obj.get('characteristics', {}).get('diet', None)}<br/>\n"
+        animal_list_item += "      <li><strong>Diet:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('diet', None)}</li>\n"
     if animal_obj.get('locations', None):
-        animal_list_item += f"      <strong>Locations:</strong> {', '.join(animal_obj.get('locations', []))}<br/>\n"
+        animal_list_item += f"      <li><strong>Locations:</strong> "
+        animal_list_item += f"{', '.join(animal_obj.get('locations', []))}</li>\n"
 
     if animal_obj.get('characteristics', {}).get('type', None):
-        animal_list_item += "      <strong>Type:</strong> "
-        animal_list_item += f"{animal_obj.get('characteristics', {}).get('type', None)}<br/>\n"
+        animal_list_item += "      <li><strong>Type:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('type', None)}</li>\n"
     if animal_obj.get('characteristics', {}).get('weight', None):
-        animal_list_item += "      <strong>Weight:</strong> "
-        animal_list_item += f"{animal_obj.get('characteristics', {}).get('weight', None)}<br/>\n"
+        animal_list_item += "      <li><strong>Weight:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('weight', None)}</li>\n"
     if animal_obj.get('characteristics', {}).get('type', None):
-        animal_list_item += "      <strong>Lifespan:</strong> "
-        animal_list_item += f"{animal_obj.get('characteristics', {}).get('lifespan', None)}<br/>\n"
-
+        animal_list_item += "      <li><strong>Lifespan:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('lifespan', None)}</li>\n"
+    animal_list_item += '   </ul>\n'
     animal_list_item += "   </p>\n"
     animal_list_item += "</li>\n\n"
+
     return animal_list_item
 
 
