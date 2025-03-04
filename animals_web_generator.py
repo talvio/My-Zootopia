@@ -40,6 +40,28 @@ def print_foxes(fox_file):
             print(f"Type: {fox.get('characteristics',{}).get('type', None)}")
         print()
 
+
+def serialize_animal(animal_obj):
+    """
+    Takes input as dict and returns it serialized html list item string
+    :param animal_obj:
+    :return: html list item string
+    """
+    animal_list_item = ""
+    animal_list_item += '<li class="cards__item">\n'
+    animal_list_item += f'  <div class="card__title">{animal_obj.get("name", "No name")}</div>\n'
+    animal_list_item += '   <p class="card__text">\n'
+    if animal_obj.get('characteristics', {}).get('diet', None):
+        animal_list_item += f"      <strong>Diet:</strong> {animal_obj.get('characteristics', {}).get('diet', None)}<br/>\n"
+    if animal_obj.get('locations', None):
+        animal_list_item += f"      <strong>Location:</strong> {animal_obj.get('locations', [])[0]}<br/>\n"
+    if animal_obj.get('characteristics', {}).get('type', None):
+        animal_list_item += f"      <strong>Type:</strong> {animal_obj.get('characteristics', {}).get('type', None)}<br/>\n"
+    animal_list_item += "   </p>\n"
+    animal_list_item += "</li>\n\n"
+    return animal_list_item
+
+
 def foxes_to_html_list(fox_file):
     """
     Read fox information and return it all in one string, each fox as HTML list (<li></li>) item
@@ -48,17 +70,7 @@ def foxes_to_html_list(fox_file):
     foxes_data = load_data(fox_file)
     foxes_string = ""
     for fox in foxes_data:
-        foxes_string += '<li class="cards__item">\n'
-        foxes_string += f'  <div class="card__title">{fox.get("name","No name")}</div>\n'
-        foxes_string += '   <p class="card__text">\n'
-        if fox.get('characteristics',{}).get('diet', None):
-            foxes_string += f"      <strong>Diet:</strong> {fox.get('characteristics',{}).get('diet', None)}<br/>\n"
-        if fox.get('locations', None):
-            foxes_string += f"      <strong>Location:</strong> {fox.get('locations', [])[0]}<br/>\n"
-        if fox.get('characteristics',{}).get('type', None):
-            foxes_string += f"      <strong>Type:</strong> {fox.get('characteristics',{}).get('type', None)}<br/>\n"
-        foxes_string += "   </p>\n"
-        foxes_string += "</li>\n\n"
+        foxes_string += serialize_animal(fox)
     return foxes_string
 
 
