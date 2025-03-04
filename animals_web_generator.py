@@ -49,14 +49,26 @@ def serialize_animal(animal_obj):
     """
     animal_list_item = ""
     animal_list_item += '<li class="cards__item">\n'
-    animal_list_item += f'  <div class="card__title">{animal_obj.get("name", "No name")}</div>\n'
+    animal_list_item += f'  <div class="card__title">{animal_obj.get("name", "No name")}'
+    animal_list_item += f'  <span class="scientific__name">('
+    animal_list_item += f'{animal_obj.get("taxonomy", {}).get('scientific_name', "no scientific name")})</span></div>\n'
     animal_list_item += '   <p class="card__text">\n'
     if animal_obj.get('characteristics', {}).get('diet', None):
-        animal_list_item += f"      <strong>Diet:</strong> {animal_obj.get('characteristics', {}).get('diet', None)}<br/>\n"
+        animal_list_item += "      <strong>Diet:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('diet', None)}<br/>\n"
     if animal_obj.get('locations', None):
-        animal_list_item += f"      <strong>Location:</strong> {animal_obj.get('locations', [])[0]}<br/>\n"
+        animal_list_item += f"      <strong>Locations:</strong> {', '.join(animal_obj.get('locations', []))}<br/>\n"
+
     if animal_obj.get('characteristics', {}).get('type', None):
-        animal_list_item += f"      <strong>Type:</strong> {animal_obj.get('characteristics', {}).get('type', None)}<br/>\n"
+        animal_list_item += "      <strong>Type:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('type', None)}<br/>\n"
+    if animal_obj.get('characteristics', {}).get('weight', None):
+        animal_list_item += "      <strong>Weight:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('weight', None)}<br/>\n"
+    if animal_obj.get('characteristics', {}).get('type', None):
+        animal_list_item += "      <strong>Lifespan:</strong> "
+        animal_list_item += f"{animal_obj.get('characteristics', {}).get('lifespan', None)}<br/>\n"
+
     animal_list_item += "   </p>\n"
     animal_list_item += "</li>\n\n"
     return animal_list_item
