@@ -18,7 +18,7 @@ def load_data(file_path):
         return json.load(handle)
 
 
-def load_animals(animal = 'fox'):
+def load_animals(animal):
     """
     Fetch data about an anomal family from Animals API
     :param animal: a string to be used as the animals search string
@@ -40,25 +40,6 @@ def read_template_file(file_path):
     """
     with open(file_path, "r") as file:
         return file.read()
-
-
-def print_foxes(fox_file):
-    """
-    reads the content of a file, iterates through the animals data from the file, and for each animal prints:
-    Name, Diet, The first location from the locations list, Type
-    :return: None
-    """
-    foxes_data = load_animals("fox")
-    for fox in foxes_data:
-        if fox.get('name'):
-            print(f"Name: {fox.get('name')}")
-        if fox.get('characteristics',{}).get('diet', None):
-            print(f"Diet: {fox.get('characteristics',{}).get('diet', None)}")
-        if fox.get('locations', None):
-            print(f"Location: {fox.get('locations', [])[0]}")
-        if fox.get('characteristics',{}).get('type', None):
-            print(f"Type: {fox.get('characteristics',{}).get('type', None)}")
-        print()
 
 
 def serialize_animal(animal_obj):
@@ -97,7 +78,7 @@ def serialize_animal(animal_obj):
     return animal_list_item
 
 
-def foxes_to_html_list(animal_data, skin_filter=ALL_SELECTION):
+def animals_to_html_list(animal_data, skin_filter=ALL_SELECTION):
     """
     Return animal data in one string, each animal as HTML list (<li></li>) item
     :skin_filter: If used, filters the animals in the output based on their skin type as stated in this variable.
@@ -131,6 +112,23 @@ def discover_skin_types(animal_data):
     for animal in animal_data:
        skin_types.add(animal.get('characteristics',{}).get('skin_type', None))
     return list(skin_types)
+
+
+def ask_string(message="Give your input: ", default_string=None):
+    """
+    :param default_string: If the user gives an empty string, function returns the default string
+    :param message: Prompt message, what is asked from the user
+    :return: a string the user types from the keyboard
+    This method separates controller from using input directly.
+    """
+    user_input = ""
+    while len(user_input) == 0:
+        if default_string is None:
+            user_input = input(f"{message}").strip()
+        else:
+            user_input = (input(f"{message}[{default_string}] ").strip()
+                          or str(default_string))
+    return user_input
 
 
 def ask_number(message="Give a number: ", lower_limit=0, upper_limit=None, default_number=None, allow_empty=False):
@@ -185,14 +183,19 @@ def ask_which_skin_type(animal_data):
 
 def main():
     """
-    Create a HTML file ANIMALS_FILE which lists animals from the FOX_FILE.
+    Create a HTML file ANIMALS_FILE which lists information about animals whose name matches a string we
+    ask from the user.
     :return: None
     """
     html_page_template = read_template_file(TEMPLATE_FILE)
-    animals_data = load_animals("fox")
-    skin_type = ask_which_skin_type(animals_data)
-    fox_html_data = html_page_template.replace(DATA_PLACEHOLDER, foxes_to_html_list(animals_data, skin_filter=skin_type))
-    save_to_file(ANIMALS_FILE, fox_html_data)
+    animal_name = ask_string(message="Enter a name of an animal: ")
+    animals_data = load_animals(animal_name)
+    if animals_data is None:
+        print(f"We didn't find animals named {animal_name}. We need to wait for its discovery.")
+    else:
+        skin_type = ask_which_skin_type(animals_data)
+        animal_html_data = html_page_template.replace(DATA_PLACEHOLDER, animals_to_html_list(animals_data, skin_filter=skin_type))
+        save_to_file(ANIMALS_FILE, animal_html_data)
 
 
 if __name__ == '__main__':
