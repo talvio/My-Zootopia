@@ -1,6 +1,11 @@
-import json
+import requests
+import os
+from dotenv import load_dotenv
 
-FOX_FILE = "animals_data.json"
+
+load_dotenv()
+ANIMALS_API_KEY = os.getenv('ANIMALS_API_KEY')
+ANIMALS_API = "https://api.api-ninjas.com/v1/animals"
 TEMPLATE_FILE = "animals_template.html"
 DATA_PLACEHOLDER = "__REPLACE_ANIMALS_INFO__"
 ANIMALS_FILE = "animals.html"
@@ -11,6 +16,20 @@ def load_data(file_path):
     """ Loads a JSON file """
     with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def load_animals(animal = 'fox'):
+    """
+    Fetch data about an anomal family from Animals API
+    :param animal: a string to be used as the animals search string
+    :return: List of dictionaries. Each dict contains info about one animal that matches the query string.
+    """
+    api_url = ANIMALS_API + f'?name={animal}'
+    response = requests.get(api_url, headers={'X-Api-Key': ANIMALS_API_KEY})
+    if response.status_code == requests.codes.ok:
+        return response.json()
+    else:
+        return None
 
 
 def read_template_file(file_path):
@@ -25,11 +44,11 @@ def read_template_file(file_path):
 
 def print_foxes(fox_file):
     """
-    reads the content of animals_data.json, iterates through the animals, and for each one prints:
+    reads the content of a file, iterates through the animals data from the file, and for each animal prints:
     Name, Diet, The first location from the locations list, Type
     :return: None
     """
-    foxes_data = load_data(fox_file)
+    foxes_data = load_animals("fox")
     for fox in foxes_data:
         if fox.get('name'):
             print(f"Name: {fox.get('name')}")
@@ -78,17 +97,17 @@ def serialize_animal(animal_obj):
     return animal_list_item
 
 
-def foxes_to_html_list(fox_file, skin_filter=ALL_SELECTION):
+def foxes_to_html_list(animal_data, skin_filter=ALL_SELECTION):
     """
-    Read fox information and return it all in one string, each fox as HTML list (<li></li>) item
-    :return: Information about foxes in one string format as HTML list items
+    Return animal data in one string, each animal as HTML list (<li></li>) item
+    :skin_filter: If used, filters the animals in the output based on their skin type as stated in this variable.
+    :return: Information about animals in one string, formatted as HTML list items
     """
-    foxes_data = load_data(fox_file)
-    foxes_string = ""
-    for fox in foxes_data:
-        if skin_filter == ALL_SELECTION or fox.get('characteristics',{}).get('skin_type', None) == skin_filter:
-            foxes_string += serialize_animal(fox)
-    return foxes_string
+    animal_string = ""
+    for animal in animal_data:
+        if skin_filter == ALL_SELECTION or animal.get('characteristics',{}).get('skin_type', None) == skin_filter:
+            animal_string += serialize_animal(animal)
+    return animal_string
 
 
 def save_to_file(file_path, data):
@@ -104,7 +123,7 @@ def save_to_file(file_path, data):
 
 def discover_skin_types(animal_data):
     """
-    Discover what skin types the animal have
+    Discover what skin types the animals have
     :param animal_data: animal_data in dict. Skin type is in a dict inside another dict
     :return: list with all skin types
     """
@@ -149,12 +168,12 @@ def ask_number(message="Give a number: ", lower_limit=0, upper_limit=None, defau
     return user_input_number
 
 
-def ask_which_skin_type(animal_file):
+def ask_which_skin_type(animal_data):
     """
     Ask the user which skin type we will use later
     :return: One of the skin types from the animal_file data
     """
-    skin_types = discover_skin_types(load_data(animal_file))
+    skin_types = discover_skin_types(animal_data)
     skin_types.sort()
     skin_types.append(ALL_SELECTION)
     for skin_num, skin_type in enumerate(skin_types):
@@ -170,8 +189,9 @@ def main():
     :return: None
     """
     html_page_template = read_template_file(TEMPLATE_FILE)
-    skin_type = ask_which_skin_type(FOX_FILE)
-    fox_html_data = html_page_template.replace(DATA_PLACEHOLDER, foxes_to_html_list(FOX_FILE, skin_filter=skin_type))
+    animals_data = load_animals("fox")
+    skin_type = ask_which_skin_type(animals_data)
+    fox_html_data = html_page_template.replace(DATA_PLACEHOLDER, foxes_to_html_list(animals_data, skin_filter=skin_type))
     save_to_file(ANIMALS_FILE, fox_html_data)
 
 
