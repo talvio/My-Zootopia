@@ -110,7 +110,7 @@ def discover_skin_types(animal_data):
     """
     skin_types = set()
     for animal in animal_data:
-       skin_types.add(animal.get('characteristics',{}).get('skin_type', None))
+       skin_types.add(animal.get('characteristics',{}).get('skin_type', "Not specified"))
     return list(skin_types)
 
 
