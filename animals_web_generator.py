@@ -7,6 +7,7 @@ load_dotenv()
 ANIMALS_API_KEY = os.getenv('ANIMALS_API_KEY')
 ANIMALS_API = "https://api.api-ninjas.com/v1/animals"
 TEMPLATE_FILE = "animals_template.html"
+NOT_FOUND_TEMPLATE_FILE = "not_found_template.html"
 DATA_PLACEHOLDER = "__REPLACE_ANIMALS_INFO__"
 ANIMALS_FILE = "animals.html"
 ALL_SELECTION = "All of them"
@@ -181,6 +182,12 @@ def ask_which_skin_type(animal_data):
     return skin_types[user_selection - 1]
 
 
+def make_animals_not_found_page(animal_name):
+    html_page_template = read_template_file(NOT_FOUND_TEMPLATE_FILE)
+    not_found_page = html_page_template.replace(DATA_PLACEHOLDER, animal_name)
+    save_to_file(ANIMALS_FILE, not_found_page)
+
+
 def main():
     """
     Create a HTML file ANIMALS_FILE which lists information about animals whose name matches a string we
@@ -190,8 +197,9 @@ def main():
     html_page_template = read_template_file(TEMPLATE_FILE)
     animal_name = ask_string(message="Enter a name of an animal: ")
     animals_data = load_animals(animal_name)
-    if animals_data is None:
-        print(f"We didn't find animals named {animal_name}. We need to wait for its discovery.")
+
+    if len(animals_data) == 0:
+        make_animals_not_found_page(animal_name)
     else:
         skin_type = ask_which_skin_type(animals_data)
         animal_html_data = html_page_template.replace(DATA_PLACEHOLDER, animals_to_html_list(animals_data, skin_filter=skin_type))
