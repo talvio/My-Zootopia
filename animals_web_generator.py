@@ -158,6 +158,13 @@ def ask_which_skin_type(animal_data):
 
 
 def make_animals_not_found_page(animal_name):
+    """
+    Makes the html in case no animals match the query string.
+    The page has a picture of a famous scientist and the text
+    "I am sorry! <query string> is unknown to science"
+    :param animal_name: the query string used as supposedly an animal name or a part of it
+    :return: None
+    """
     html_page_template = read_template_file(NOT_FOUND_TEMPLATE_FILE)
     not_found_page = html_page_template.replace(DATA_PLACEHOLDER, animal_name)
     save_to_file(ANIMALS_FILE, not_found_page)
