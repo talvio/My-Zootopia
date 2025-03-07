@@ -173,7 +173,7 @@ def main():
     animal_name = ask_string(message="Enter a name of an animal: ")
     animals_data = data_fetcher.load_animals(animal_name)
 
-    if len(animals_data) == 0:
+    if animals_data is None or len(animals_data) == 0:
         make_animals_not_found_page(animal_name)
     else:
         skin_type = ask_which_skin_type(animals_data)
