@@ -1,4 +1,4 @@
-from data_fetcher import load_animals
+import data_fetcher
 
 
 TEMPLATE_FILE = "animals_template.html"
@@ -171,7 +171,7 @@ def main():
     """
     html_page_template = read_template_file(TEMPLATE_FILE)
     animal_name = ask_string(message="Enter a name of an animal: ")
-    animals_data = load_animals(animal_name)
+    animals_data = data_fetcher.load_animals(animal_name)
 
     if len(animals_data) == 0:
         make_animals_not_found_page(animal_name)

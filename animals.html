@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <style>
@@ -22,9 +21,6 @@
         }
 
         body {
-          display: flex;              /* Turn the body into a flexbox */
-          justify-content: center;    /* Center horizontally */
-          flex-direction: column;
           font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
           font-style: normal;
           font-weight: 400;
@@ -34,10 +30,7 @@
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           -moz-font-feature-settings: "liga" on;
-          /* width: 900px;
-          display: flex;  */
-          justify-content: center;
-          align-items: center;
+          width: 900px;
           margin: auto;
         }
 
@@ -89,46 +82,82 @@
           padding-inline-start: 0px;
         }
 
-        .unknown__animal {
-            position: center;
-            width: 500px;
-            height: 500px;
-            background: url('unknown to science.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            font-size: 30px;
-            text-align: center;
-            border-radius: 0.25rem;
-            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-        }
-        .top__text {
-            background-color: black;
-            margin-top: 20px;
-            padding: 10px 20px;
-            border-radius: 0.25rem;
-            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-        }
-
-        .bottom__text {
-            background-color: black;
-            margin-bottom: 40px;
-            padding: 10px 20px;
-            border-radius: 0.25rem;
-            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-        }
-
         </style>
     </head>
     <body>
         <h1>My Animal Repository</h1>
-            <div class="unknown__animal">
-                <div class="top__text">I am sorry! </div>
-                <div class="bottom__text"><em>Ilves</em> is unknown to science</div>
-            </div>
+        <ul class="cards">
+            <li class="cards__item">
+  <div class="card__title">Bearded Dragon  <span class="scientific__name">(Pogona Vitticeps)</span></div>
+   <p class="card__text">
+   <ul class="animal__facts">
+      <li><strong>Diet:</strong> Omnivore</li>
+      <li><strong>Locations:</strong> Oceania</li>
+      <li><strong>Type:</strong> Reptile</li>
+      <li><strong>Weight:</strong> 250g - 510g (9oz - 18oz)</li>
+      <li><strong>Lifespan:</strong> 6 - 15 years</li>
+   </ul>
+   </p>
+</li>
+
+<li class="cards__item">
+  <div class="card__title">Dragonfish  <span class="scientific__name">(no scientific name)</span></div>
+   <p class="card__text">
+   <ul class="animal__facts">
+      <li><strong>Diet:</strong> Carnivore</li>
+      <li><strong>Locations:</strong> Data Deficient</li>
+      <li><strong>Type:</strong> Fish</li>
+      <li><strong>Weight:</strong> 13 to 15 grams</li>
+      <li><strong>Lifespan:</strong> 10+ years, which may vary</li>
+   </ul>
+   </p>
+</li>
+
+<li class="cards__item">
+  <div class="card__title">Dragonfly  <span class="scientific__name">(no scientific name)</span></div>
+   <p class="card__text">
+   <ul class="animal__facts">
+      <li><strong>Diet:</strong> Carnivore</li>
+      <li><strong>Locations:</strong> Africa, Asia, Central-America, Eurasia, Europe, North-America, Ocean, Oceania, South-America</li>
+   </ul>
+   </p>
+</li>
+
+<li class="cards__item">
+  <div class="card__title">Komodo Dragon  <span class="scientific__name">(Varanus komodoensis)</span></div>
+   <p class="card__text">
+   <ul class="animal__facts">
+      <li><strong>Diet:</strong> Carnivore</li>
+      <li><strong>Locations:</strong> Asia</li>
+      <li><strong>Weight:</strong> 70kg - 150kg (150lbs - 300lbs)</li>
+   </ul>
+   </p>
+</li>
+
+<li class="cards__item">
+  <div class="card__title">Sea Dragon  <span class="scientific__name">(Phycodurus eques)</span></div>
+   <p class="card__text">
+   <ul class="animal__facts">
+      <li><strong>Diet:</strong> Carnivore</li>
+      <li><strong>Locations:</strong> Ocean, Oceania</li>
+   </ul>
+   </p>
+</li>
+
+<li class="cards__item">
+  <div class="card__title">Water Dragon  <span class="scientific__name">(Physignathus)</span></div>
+   <p class="card__text">
+   <ul class="animal__facts">
+      <li><strong>Diet:</strong> Omnivore</li>
+      <li><strong>Locations:</strong> Asia, Oceania</li>
+      <li><strong>Type:</strong> Reptile</li>
+      <li><strong>Weight:</strong> 0.5-1kg (1.1-2.2lbs)</li>
+      <li><strong>Lifespan:</strong> 10-20 years</li>
+   </ul>
+   </p>
+</li>
+
+
+        </ul>
     </body>
 </html>
