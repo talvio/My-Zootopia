@@ -1,36 +1,11 @@
-import requests
-import os
-from dotenv import load_dotenv
+from data_fetcher import load_animals
 
 
-load_dotenv()
-ANIMALS_API_KEY = os.getenv('ANIMALS_API_KEY')
-ANIMALS_API = "https://api.api-ninjas.com/v1/animals"
 TEMPLATE_FILE = "animals_template.html"
 NOT_FOUND_TEMPLATE_FILE = "not_found_template.html"
 DATA_PLACEHOLDER = "__REPLACE_ANIMALS_INFO__"
 ANIMALS_FILE = "animals.html"
 ALL_SELECTION = "All of them"
-
-
-def load_data(file_path):
-    """ Loads a JSON file """
-    with open(file_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def load_animals(animal):
-    """
-    Fetch data about an anomal family from Animals API
-    :param animal: a string to be used as the animals search string
-    :return: List of dictionaries. Each dict contains info about one animal that matches the query string.
-    """
-    api_url = ANIMALS_API + f'?name={animal}'
-    response = requests.get(api_url, headers={'X-Api-Key': ANIMALS_API_KEY})
-    if response.status_code == requests.codes.ok:
-        return response.json()
-    else:
-        return None
 
 
 def read_template_file(file_path):

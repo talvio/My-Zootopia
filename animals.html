@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <style>
@@ -21,6 +22,9 @@
         }
 
         body {
+          display: flex;              /* Turn the body into a flexbox */
+          justify-content: center;    /* Center horizontally */
+          flex-direction: column;
           font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
           font-style: normal;
           font-weight: 400;
@@ -30,7 +34,10 @@
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           -moz-font-feature-settings: "liga" on;
-          width: 900px;
+          /* width: 900px;
+          display: flex;  */
+          justify-content: center;
+          align-items: center;
           margin: auto;
         }
 
@@ -82,179 +89,46 @@
           padding-inline-start: 0px;
         }
 
+        .unknown__animal {
+            position: center;
+            width: 500px;
+            height: 500px;
+            background: url('unknown to science.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 0.25rem;
+            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+        }
+        .top__text {
+            background-color: black;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 0.25rem;
+            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+        }
+
+        .bottom__text {
+            background-color: black;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 0.25rem;
+            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+        }
+
         </style>
     </head>
     <body>
         <h1>My Animal Repository</h1>
-        <ul class="cards">
-            <li class="cards__item">
-  <div class="card__title">Aardwolf  <span class="scientific__name">(Proteles cristata)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> Africa</li>
-      <li><strong>Type:</strong> mammal</li>
-      <li><strong>Weight:</strong> 17-31lbs</li>
-      <li><strong>Lifespan:</strong> 15 years</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Arctic Wolf  <span class="scientific__name">(Canus Lupus Arcticus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> North-America</li>
-      <li><strong>Type:</strong> Mammal</li>
-      <li><strong>Weight:</strong> 25kg - 40kg (55lbs - 88lbs)</li>
-      <li><strong>Lifespan:</strong> 7 - 10 years</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Czechoslovakian Wolfdog  <span class="scientific__name">(Canis lupus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Omnivore</li>
-      <li><strong>Locations:</strong> Europe</li>
-      <li><strong>Type:</strong> mammal</li>
-      <li><strong>Lifespan:</strong> 10-15 years</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Eurasian Wolf  <span class="scientific__name">(Canis lupus lupus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> Asia, Eurasia, Europe</li>
-      <li><strong>Type:</strong> mammal</li>
-      <li><strong>Weight:</strong> 86 to 174 lbs.</li>
-      <li><strong>Lifespan:</strong> 6-8 years, though some live up to 17 years.</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Irish WolfHound  <span class="scientific__name">(Canis Lupus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Omnivore</li>
-      <li><strong>Locations:</strong> Europe</li>
-      <li><strong>Weight:</strong> 54kg (120lbs)</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Mackenzie Wolf  <span class="scientific__name">(Canis lupus occidentalis)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> North-America</li>
-      <li><strong>Type:</strong> Mammal</li>
-      <li><strong>Weight:</strong> 85-153 lbs</li>
-      <li><strong>Lifespan:</strong> 6-8 years, though some can live up to 17 years in captivity</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Maned Wolf  <span class="scientific__name">(Chyrsocyon brachyurus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Omnivore</li>
-      <li><strong>Locations:</strong> South-America</li>
-      <li><strong>Weight:</strong> 51 pounds</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Red Wolf  <span class="scientific__name">(Canis lupus rufus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> North-America</li>
-      <li><strong>Type:</strong> Mammal</li>
-      <li><strong>Weight:</strong> 18kg - 41kg (40lbs - 90lbs)</li>
-      <li><strong>Lifespan:</strong> 10 - 12 years</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Saarloos Wolfdog  <span class="scientific__name">(Canis lupus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Omnivore</li>
-      <li><strong>Locations:</strong> Europe</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Wolf  <span class="scientific__name">(Canis lupus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> Africa, Asia, Central-America, Eurasia, Europe, North-America, South-America</li>
-      <li><strong>Type:</strong> Mammal</li>
-      <li><strong>Weight:</strong> 80-150lbs</li>
-      <li><strong>Lifespan:</strong> 10-12 years</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Wolf Eel  <span class="scientific__name">(Anarrhichthys ocellatus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> Ocean</li>
-      <li><strong>Weight:</strong> 41 pounds</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Wolf Snake  <span class="scientific__name">(Lycodon capucinus)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Omnivore</li>
-      <li><strong>Locations:</strong> Asia</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Wolf Spider  <span class="scientific__name">(no scientific name)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Omnivore</li>
-      <li><strong>Locations:</strong> Africa, Asia, Central-America, Eurasia, Europe, North-America, Oceania, South-America</li>
-      <li><strong>Weight:</strong> Less than 1oz (30g )</li>
-   </ul>
-   </p>
-</li>
-
-<li class="cards__item">
-  <div class="card__title">Wolffish  <span class="scientific__name">(Anarhichadidae)</span></div>
-   <p class="card__text">
-   <ul class="animal__facts">
-      <li><strong>Diet:</strong> Carnivore</li>
-      <li><strong>Locations:</strong> Ocean</li>
-      <li><strong>Type:</strong> Fish</li>
-      <li><strong>Weight:</strong> Up to 50 pounds</li>
-      <li><strong>Lifespan:</strong> At least 12 years</li>
-   </ul>
-   </p>
-</li>
-
-
-        </ul>
+            <div class="unknown__animal">
+                <div class="top__text">I am sorry! </div>
+                <div class="bottom__text"><em>Ilves</em> is unknown to science</div>
+            </div>
     </body>
 </html>
